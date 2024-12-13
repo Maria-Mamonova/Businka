@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
+
+class GalleryController extends Controller
+{
+    public function index()
+    {
+        // Получаем список файлов в папке public/images
+        $images = collect(File::files(public_path('images')))
+            ->filter(fn($file) => in_array($file->getExtension(), ['jpg', 'jpeg', 'png', 'gif'])) // Фильтруем только изображения
+            ->map(fn($file) => $file->getFilename()) // Получаем только имя файла
+            ->values(); // Переиндексируем массив
+
+        // Возвращаем представление с данными
+        return view('gallery', compact('images'));
+    }
+}

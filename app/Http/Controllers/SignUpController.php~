@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\SignUpRequest;
+use App\Models\SignUp;
+use Illuminate\Http\Request;
+
+// Контроллер для обработки регистрации пользователей
+class SignUpController extends Controller
+{
+    public function submit(SignUpRequest $req){
+
+        // Создание новой записи в базе данных на основе валидированных данных
+        SignUp::create($req->validated());
+
+        //Вернет сообщение об успешной регистрации
+        return redirect()->back()->with('success', 'You have successfully registered');
+    }
+}
