@@ -60,4 +60,5 @@ yarn-error.log
 pnpm-debug.log
 # Настройки для Fleet (если используется)
 /.fleet
+public_html
 /laradock/
